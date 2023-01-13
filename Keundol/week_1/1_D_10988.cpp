@@ -1,19 +1,14 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-string str;
-int check;
+string str1, str2;
 
 int main() {
-	cin >> str;
-	check = 1;
-	for (int i = 0; i < str.length() / 2; i++) {
-		if (str[i] != str[str.length() - i - 1]) {
-			check = 0;
-			break;
-		}
-	}
-
-	cout << check;
+	cin >> str1;
+	str2 = str1;
+	reverse(str2.begin(), str2.end());
+	if (str1 == str2) cout << 1;
+	else cout << 0;
 }

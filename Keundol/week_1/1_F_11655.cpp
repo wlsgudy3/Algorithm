@@ -4,26 +4,19 @@
 using namespace std;
 
 string str;
-char low[52], upp[52];
-
 
 int main() {
 	getline(cin, str);
-
-	for (int i = 0; i < 26; i++) {
-		low[i] = 'a' + i;
-		low[i + 26] = 'a' + i;
- 		upp[i] = 'A' + i;
-		upp[i + 26] = 'A' + i;
-	}
-
 	for (int i = 0; i < str.size(); i++) {
- 		if ('a' <= str[i] && str[i] <= 'z') {
-			str[i] = low[str[i] - 'a' + 13];
+		if (65 <= str[i] && str[i] <= 90) {
+			if (str[i] + 13 > 90) str[i] = str[i] + 13 - 26;
+			else str[i] = str[i] + 13;
 		}
-		else if ('A' <= str[i] && str[i] <= 'Z') {
-			str[i] = upp[str[i] - 'A' + 13];
+		else if (97 <= str[i] && str[i] <= 122) {
+			if (str[i] + 13 > 122) str[i] = str[i] + 13 - 26;
+			else str[i] = str[i] + 13;
 		}
+		cout << str[i];
 	}
-	cout << str;
+	return 0;
 }

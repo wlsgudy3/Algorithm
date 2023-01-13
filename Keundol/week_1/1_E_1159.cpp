@@ -1,33 +1,17 @@
 #include <iostream>
-#include <string>
-#include <map>
+
 using namespace std;
 
-map<char, int> mp;
-string str;
-int num, check;
-char temp;
+string str, ret;
+int n, cnt[26];
 
 int main() {
-	cin >> num;
-
-	for (int i = 0; i < num; i++) {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
 		cin >> str;
-		temp = str[0];
-		if (mp[temp] == 0) {
-			mp[temp] = 1;
-		}
-		else {
-			mp[temp]++;
-		}
+		cnt[str[0] - 'a']++;
 	}
-
-	for (auto a : mp) {
-		if (a.second >= 5) {
-			cout << a.first;
-			check = 1;
-		}
-	}
-	if (check == 0) 
-		cout << "PREDAJA";
+	for (int i = 0; i < 26; i++) if (cnt[i] >= 5) ret += (i + 'a');
+	if (ret.size()) cout << ret;
+	else cout << "PREDAJA";
 }
