@@ -2,21 +2,17 @@
 
 using namespace std;
 
-int n, k, arr[100001], psum[100001];
+int n, k, temp, psum[100001], ret = -10000004;
 
 int main() {
 	cin >> n >> k;
-	for (int i = 1; i < n + 1; i++) {
-		cin >> arr[i];
-		psum[i] = psum[i - 1] + arr[i];
+	for (int i = 1; i <= n; i++) {
+		cin >> temp;
+		psum[i] = psum[i - 1] + temp;
 	}
-	int max, temp;
-	max = psum[k];
-	for (int i = 1; i + k - 1 < n + 1; i++) {
-		temp = psum[i + k - 1] - psum[i - 1];
-		if (max < temp)
-			max = temp;
+	for (int i = k; i <= n; i++) {
+		ret = max(ret, psum[i] - psum[i - k]);
 	}
-	cout << max;
-    return 0;
+	cout << ret;
+	return 0;
 }
