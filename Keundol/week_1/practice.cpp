@@ -1,25 +1,29 @@
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
-int arr[100001], psum[100001], n;
+struct Node {
+	int data;
+	Node* next;
+};
 
-int main() {
-	int max, min;
-	cin >> n;
-	for (int i = 1; i <= n; i++) {
-		cin >> arr[i];
-		if (arr[i] == 1) {
-			psum[i] = psum[i - 1] + 1;
-		}
-		else if (arr[i] == 2) {
-			psum[i] = psum[i - 1] - 1;
-		}
-	}
+Node* new_node(int data) {
+	Node* node = new Node;
 
-	max = *max_element(psum, psum + n + 1);
-	min = *min_element(psum, psum + n + 1);
+	node->data = data;
+	node->next = nullptr;
 
-	cout << max - min;
+	return node;
+}
+
+constexpr size_t MAX_NODE = 10000;
+
+int node_count = 0;
+Node node_pool[MAX_NODE];
+
+Node* new_node(int data) {
+	node_pool[node_count].data = data;
+	node_pool[node_count].next = nullptr;
+
+	return &node_pool[node_count++];
 }
