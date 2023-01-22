@@ -27,3 +27,7 @@ Node* new_node(int data) {
 
 	return &node_pool[node_count++];
 }
+
+int main() {
+	Node slist;
+}
