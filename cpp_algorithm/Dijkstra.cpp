@@ -53,3 +53,47 @@ int main() {
 	printf("\n");
 	return 0;
 }
+
+
+//우선순위 큐
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+const int INF(987654321);
+const int MAX_N = 6;
+
+int graph[MAX_N][MAX_N] = {
+	{0,2,5,1,INF,INF},
+	{2,0,3,2,INF,INF},
+	{5,3,0,3,1,5},
+	{1,2,3,0,1,INF},
+	{INF,INF,1,1,0,2},
+	{INF,INF,5,INF,2,0}
+};
+
+void dijkstra(int arr[MAX_N][MAX_N], int start, int dist[MAX_N]) {
+	priority_queue<pair <int, int>> pq;
+
+	for (int i = 0; i < MAX_N; i++) {
+		dist[i] = INF;
+	}
+
+	pq.push({ 0, start });
+
+	while (!pq.empty()) {
+		int cur_dist = -pq.top().first;
+		int cur_node = pq.top().second;
+		pq.pop();
+
+		for (int i = 0; i < MAX_N; i++) {
+			int nxt_dist = cur_dist + arr[cur_node][i];
+
+			if (nxt_dist < dist[i]) {
+				dist[i] = nxt_dist;
+				pq.push({ -nxt_dist, i });
+			}
+		}
+	}
+}
